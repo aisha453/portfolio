@@ -1,100 +1,120 @@
 import React from 'react';
-import { Calendar, MapPin, CheckCircle2, Compass } from 'lucide-react';
-import { experienceData } from '../data/portfolioData';
+import { experience, education, certifications } from '../data/portfolioData';
 
 export default function Experience() {
   return (
-    <section id="experience" className="relative py-24 overflow-hidden border-t border-white/5 bg-[#050813]/60">
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-10 w-80 h-80 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="experience" className="pt-10 pb-0 bg-[#F6EFE6] text-left relative">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 space-y-16 pb-20">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-xs font-mono text-purple-300 mb-3 backdrop-blur-md">
-            <Compass className="w-3.5 h-3.5" />
-            <span>LEADERSHIP & FELLOWSHIPS</span>
+        <div className="pb-6 border-b border-[#D5C6B5] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-wider text-[#AD5424] font-semibold">
+              // Trajectory & Fellowships
+            </span>
+            <h2 className="font-editorial text-2xl sm:text-3xl lg:text-4xl font-bold text-[#20140E] mt-1">
+              Experience & Leadership
+            </h2>
           </div>
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-            Strategic Programs & <span className="bg-gradient-to-r from-purple-300 via-indigo-300 to-cyan-300 bg-clip-text text-transparent">Impact</span>
-          </h2>
-          <p className="mt-3 text-slate-400 text-sm sm:text-base">
-            Global problem-solving programs, cyber governance initiatives, and decentralized application fellowships.
-          </p>
+          <span className="text-xs sm:text-sm font-mono text-[#7A6A5E]">
+            Structured Problem-Solving • Outreach
+          </span>
         </div>
 
-        {/* Timeline Container */}
-        <div className="relative max-w-4xl mx-auto">
-          {/* Vertical Glowing Connector Line */}
-          <div className="absolute left-4 sm:left-1/2 top-4 bottom-4 -translate-x-1/2 w-[2px] bg-gradient-to-b from-indigo-500 via-cyan-500 to-purple-500/20 hidden sm:block opacity-40" />
+        {/* Asymmetrical 2-Column Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 xl:gap-14 items-start">
+          {/* Left Column (7 cols): Leadership & Programs */}
+          <div className="lg:col-span-7 space-y-8">
+            <h3 className="font-editorial text-xl sm:text-2xl font-bold text-[#20140E] pb-2 border-b border-[#E7DDD0]">
+              Strategic Roles & Programs
+            </h3>
 
-          <div className="space-y-12">
-            {experienceData.map((item, index) => {
-              const isEven = index % 2 === 0;
-
-              return (
+            <div className="space-y-6">
+              {experience.map((item, index) => (
                 <div
                   key={index}
-                  className={`relative flex flex-col sm:flex-row items-center gap-8 ${
-                    isEven ? 'sm:flex-row-reverse' : ''
-                  }`}
+                  className="p-7 rounded-2xl bg-[#FFFDF9] border border-[#E7DDD0] shadow-xs text-left space-y-2.5 transform hover:-translate-y-0.5 transition-transform"
                 >
-                  {/* Central Node Dot for desktop */}
-                  <div className="absolute left-1/2 -translate-x-1/2 hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-[#0a0f1e] border-2 border-cyan-400 shadow-lg shadow-cyan-400/30 z-10">
-                    <span className="w-2.5 h-2.5 rounded-full bg-cyan-300 animate-pulse"></span>
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+                    <h4 className="font-editorial text-lg sm:text-xl font-bold text-[#20140E]">
+                      {item.role}
+                    </h4>
+                    <span className="text-xs font-mono text-[#7A6A5E]">
+                      {item.period}
+                    </span>
                   </div>
 
-                  {/* Empty Spacer Column for Desktop Alternate */}
-                  <div className="w-full sm:w-1/2 hidden sm:block" />
-
-                  {/* Experience Card */}
-                  <div className="w-full sm:w-1/2">
-                    <div className="group p-6 sm:p-7 rounded-3xl bg-[#0a0f21]/80 hover:bg-[#0d142b]/90 border border-white/10 hover:border-purple-400/40 backdrop-blur-2xl shadow-xl shadow-black/40 transition-all duration-300 hover:-translate-y-1">
-                      {/* Top Badges */}
-                      <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
-                        <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-indigo-500/15 border border-indigo-500/30 text-indigo-300">
-                          {item.badge}
-                        </span>
-                        <div className="flex items-center gap-1.5 text-xs font-mono text-slate-400">
-                          <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-                          <span>{item.period}</span>
-                        </div>
-                      </div>
-
-                      {/* Role & Org */}
-                      <h3 className="text-lg font-bold text-white group-hover:text-purple-200 transition-colors">
-                        {item.role}
-                      </h3>
-                      <h4 className="text-sm font-medium text-cyan-300 mt-0.5">
-                        {item.organization}
-                      </h4>
-
-                      <div className="flex items-center gap-1 text-[11px] font-mono text-slate-400 mt-1 mb-4">
-                        <MapPin className="w-3 h-3 text-slate-400" />
-                        <span>{item.location}</span>
-                      </div>
-
-                      <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
-                        {item.description}
-                      </p>
-
-                      {/* Bullet Highlights */}
-                      <div className="space-y-2 pt-3 border-t border-white/5">
-                        {item.highlights.map((h, hIdx) => (
-                          <div key={hIdx} className="flex items-start gap-2.5 text-xs text-slate-300">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                            <span>{h}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
+                  <div className="text-xs sm:text-sm font-semibold text-[#AD5424] font-mono">
+                    {item.organization} • {item.location}
                   </div>
+
+                  <p className="text-sm text-[#4D3A2F] leading-relaxed">
+                    {item.summary}
+                  </p>
                 </div>
-              );
-            })}
+              ))}
+            </div>
+          </div>
+
+          {/* Right Column (5 cols): Education & Goldman Sachs Certification */}
+          <div className="lg:col-span-5 space-y-8">
+            <h3 className="font-editorial text-xl sm:text-2xl font-bold text-[#20140E] pb-2 border-b border-[#E7DDD0]">
+              Academics & Credentials
+            </h3>
+
+            {/* KIIT Degree Card */}
+            <div className="p-7 rounded-2xl bg-[#FAF5ED] border border-[#D5C6B5] shadow-xs text-left space-y-3.5">
+              <span className="text-xs font-mono uppercase tracking-wider text-[#AD5424] font-bold block">
+                DEGREE PROGRAM
+              </span>
+              <h4 className="font-editorial text-xl font-bold text-[#20140E]">
+                {education.degree}
+              </h4>
+              <p className="text-sm font-medium text-[#AD5424]">
+                {education.institution}
+              </p>
+              <div className="text-xs sm:text-sm font-mono text-[#7A6A5E]">
+                {education.period} • {education.location}
+              </div>
+
+              <div className="pt-3 border-t border-[#D5C6B5]">
+                <span className="text-xs font-mono text-[#8B796D] block mb-1.5 font-semibold">
+                  Coursework:
+                </span>
+                <p className="text-xs sm:text-sm text-[#4D3A2F] leading-relaxed">
+                  {education.coursework.join(', ')}
+                </p>
+              </div>
+            </div>
+
+            {/* Goldman Sachs Certification Card */}
+            {certifications.map((cert, cIdx) => (
+              <div
+                key={cIdx}
+                className="p-6 sm:p-7 rounded-2xl bg-[#FFFDF9] border border-[#E7DDD0] shadow-xs text-left space-y-2 transform lg:translate-x-1"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono uppercase tracking-wider text-[#AD5424] font-bold">
+                    VERIFIED SIMULATION
+                  </span>
+                  <span className="text-xs font-mono text-[#7A6A5E]">{cert.period}</span>
+                </div>
+                <h4 className="font-editorial text-lg font-bold text-[#20140E]">
+                  {cert.title}
+                </h4>
+                <p className="text-xs sm:text-sm font-medium text-[#AD5424]">
+                  {cert.issuer}
+                </p>
+                <p className="text-xs sm:text-sm text-[#4D3A2F] leading-relaxed">
+                  {cert.summary}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      {/* LUXURIOUS TRANSITION: Warm Cappuccino Beige Pouring into #8C5A3C Resume Desk */}
+      <div className="w-full h-40 sm:h-60 blend-beige-to-resume pointer-events-none" />
     </section>
   );
 }

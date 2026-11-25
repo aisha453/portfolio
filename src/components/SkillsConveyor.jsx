@@ -1,202 +1,152 @@
-import React, { useState } from 'react';
-import { 
-  Sparkles, 
-  Cpu, 
-  Database, 
-  Code, 
-  Layers, 
-  Server, 
-  Workflow, 
-  Binary, 
-  TerminalSquare, 
-  Zap, 
-  Cloud, 
-  GitBranch, 
-  Globe, 
-  Palette, 
-  HardDrive, 
-  Wifi, 
-  Radio, 
-  CheckCircle2
-} from 'lucide-react';
-import { skillsTrack1, skillsTrack2, skillCategories } from '../data/portfolioData';
-
-// Map icon names safely to Lucide icons
-const renderSkillIcon = (iconName, className = "w-4 h-4") => {
-  switch (iconName) {
-    case 'Sparkles': return <Sparkles className={`${className} text-cyan-400`} />;
-    case 'Cpu': return <Cpu className={`${className} text-indigo-400`} />;
-    case 'Database': return <Database className={`${className} text-emerald-400`} />;
-    case 'Zap': return <Zap className={`${className} text-amber-400`} />;
-    case 'Server': return <Server className={`${className} text-blue-400`} />;
-    case 'Layers': return <Layers className={`${className} text-purple-400`} />;
-    case 'Cloud': return <Cloud className={`${className} text-sky-400`} />;
-    case 'GitBranch': return <GitBranch className={`${className} text-orange-400`} />;
-    case 'Globe': return <Globe className={`${className} text-teal-400`} />;
-    case 'Palette': return <Palette className={`${className} text-pink-400`} />;
-    case 'HardDrive': return <HardDrive className={`${className} text-rose-400`} />;
-    case 'Wifi': return <Wifi className={`${className} text-indigo-300`} />;
-    case 'Radio': return <Radio className={`${className} text-red-400`} />;
-    case 'Binary': return <Binary className={`${className} text-violet-400`} />;
-    case 'TerminalSquare': return <TerminalSquare className={`${className} text-emerald-300`} />;
-    default: return <Code className={`${className} text-cyan-300`} />;
-  }
-};
+import React from 'react';
+import { allSkillsList, technicalSkills } from '../data/portfolioData';
 
 export default function SkillsConveyor() {
-  const [activeCategory, setActiveCategory] = useState(0);
-  const [hoveredSkill, setHoveredSkill] = useState(null);
-
-  // Duplicate arrays for seamless infinite loop
-  const infiniteTrack1 = [...skillsTrack1, ...skillsTrack1];
-  const infiniteTrack2 = [...skillsTrack2, ...skillsTrack2];
+  const tickerItems = [...allSkillsList, ...allSkillsList];
 
   return (
-    <section id="skills" className="relative py-24 overflow-hidden border-y border-white/5 bg-[#060912]/80">
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none -z-10" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-xs font-mono text-indigo-300 mb-4 backdrop-blur-md">
-          <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-          <span>TECHNICAL ARSENAL</span>
-          {hoveredSkill && (
-            <span className="text-cyan-300 font-bold ml-1 pl-2 border-l border-white/10 animate-fade-in">
-              • {hoveredSkill}
+    <section id="skills" className="pt-16 pb-0 bg-[#F5EEE4] text-left relative">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-wider text-[#AD5424] font-semibold">
+              // The Blend & The Stack
             </span>
-          )}
-        </div>
-        <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-          Engineered with <span className="bg-gradient-to-r from-indigo-300 via-cyan-300 to-purple-300 bg-clip-text text-transparent">Modern Toolchains</span>
-        </h2>
-        <p className="mt-3 text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
-          Interactive conveyor belt showcasing proficiency in full-stack architecture, multimodal vision/audio systems, cloud infrastructure, and algorithmic foundations. Hover over any skill to pause.
-        </p>
-      </div>
-
-      {/* Horizontal Moving Conveyor Belt Container */}
-      <div className="relative w-full space-y-6 pause-hover">
-        {/* Left & Right Gradient Fade Masks */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 sm:w-44 bg-gradient-to-r from-[#060912] via-[#060912]/80 to-transparent z-20 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-44 bg-gradient-to-l from-[#060912] via-[#060912]/80 to-transparent z-20 pointer-events-none" />
-
-        {/* Track 1: Moving Left (Languages & GenAI) */}
-        <div className="flex overflow-hidden select-none">
-          <div className="animate-marquee-left flex gap-4 py-2">
-            {infiniteTrack1.map((skill, index) => (
-              <div
-                key={`t1-${index}`}
-                onMouseEnter={() => setHoveredSkill(skill.name)}
-                onMouseLeave={() => setHoveredSkill(null)}
-                className="flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] backdrop-blur-xl border border-white/10 hover:border-cyan-400/50 shadow-lg shadow-black/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-cyan-500/10 cursor-pointer min-w-[240px]"
-              >
-                <div className="p-2 rounded-xl bg-white/[0.05] border border-white/10">
-                  {renderSkillIcon(skill.icon)}
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-white tracking-wide">
-                      {skill.name}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400">
-                      {skill.category}
-                    </span>
-                    <span className="text-slate-600 text-[10px]">•</span>
-                    <span className="text-[11px] text-slate-400">
-                      {skill.highlight}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
+            <h2 className="font-editorial text-2xl sm:text-3xl lg:text-4xl font-bold text-[#20140E] mt-1">
+              Technical Arsenal & Core Stack
+            </h2>
           </div>
-        </div>
-
-        {/* Track 2: Moving Right (Frameworks, Databases & CS Core) */}
-        <div className="flex overflow-hidden select-none">
-          <div className="animate-marquee-right flex gap-4 py-2">
-            {infiniteTrack2.map((skill, index) => (
-              <div
-                key={`t2-${index}`}
-                onMouseEnter={() => setHoveredSkill(skill.name)}
-                onMouseLeave={() => setHoveredSkill(null)}
-                className="flex items-center gap-3.5 px-5 py-3 rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] backdrop-blur-xl border border-white/10 hover:border-indigo-400/50 shadow-lg shadow-black/20 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-indigo-500/10 cursor-pointer min-w-[240px]"
-              >
-                <div className="p-2 rounded-xl bg-white/[0.05] border border-white/10">
-                  {renderSkillIcon(skill.icon)}
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-white tracking-wide">
-                      {skill.name}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-1.5 mt-0.5">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-indigo-400">
-                      {skill.category}
-                    </span>
-                    <span className="text-slate-600 text-[10px]">•</span>
-                    <span className="text-[11px] text-slate-400">
-                      {skill.highlight}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <span className="text-xs font-mono text-[#7A6A5E]">
+            Hover to pause conveyor belt
+          </span>
         </div>
       </div>
 
-      {/* Categorized Detailed Breakdown Hub */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-14">
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#0a0f1d]/70 backdrop-blur-2xl border border-white/10 shadow-2xl">
-          <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/10">
-            <div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Workflow className="w-5 h-5 text-cyan-400" />
-                <span>Domain Competencies by Category</span>
+      {/* Lightweight Ticker Belt: Blended warm latte foam */}
+      <div className="relative w-full overflow-hidden ticker-container py-3.5 border-y border-[#D5C6B5] bg-[#EBE0D2]/70">
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F5EEE4] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F5EEE4] to-transparent z-10 pointer-events-none" />
+
+        <div className="ticker-track flex items-center gap-3.5">
+          {tickerItems.map((skill, index) => (
+            <div
+              key={index}
+              className="px-4 py-2 rounded bg-[#FFFDF9] border border-[#D5C6B5] text-xs sm:text-sm font-mono font-medium text-[#20140E] whitespace-nowrap shadow-xs hover:border-[#AD5424] hover:bg-[#FAF5ED] transition-colors"
+            >
+              <span className="text-[#AD5424] mr-1.5 font-bold">#</span>
+              {skill}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Asymmetric Organic Cards Layout (Expanded to max-w-7xl) */}
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-12 mt-12 pb-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {/* Card 1: Wide (7 cols) - Languages & Core */}
+          <div className="md:col-span-7 p-7 sm:p-8 rounded-2xl bg-[#FFFDF9] border border-[#E7DDD0] shadow-xs text-left transform hover:-translate-y-0.5 transition-transform">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E7DDD0]">
+              <h3 className="font-editorial text-xl font-bold text-[#20140E]">
+                Languages & Foundational Logic
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Full-stack engineering & AI pipeline integration map
-              </p>
+              <span className="text-xs font-mono px-2.5 py-1 rounded bg-[#F5EEE4] text-[#8B796D]">
+                6 core languages
+              </span>
             </div>
-
-            {/* Category Tabs */}
-            <div className="flex flex-wrap gap-1.5 p-1 rounded-2xl bg-black/40 border border-white/10">
-              {skillCategories.map((cat, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveCategory(idx)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
-                    activeCategory === idx
-                      ? 'bg-gradient-to-r from-indigo-600 to-cyan-600 text-white shadow-md shadow-indigo-500/20'
-                      : 'text-slate-400 hover:text-white hover:bg-white/5'
-                  }`}
+            <p className="text-sm sm:text-base text-[#4D3A2F] mt-3.5 leading-relaxed">
+              Proficient in system-level memory semantics with <strong className="text-[#20140E]">C</strong>, object-oriented systems with <strong className="text-[#20140E]">Java</strong>, and high-velocity scripting and data pipelines with <strong className="text-[#20140E]">Python</strong> and modern JavaScript (ES6+).
+            </p>
+            <div className="flex flex-wrap gap-2.5 mt-5">
+              {technicalSkills.languages.map((lang, lIdx) => (
+                <span
+                  key={lIdx}
+                  className="px-3 py-1.5 rounded bg-[#F5EEE4] border border-[#D5C6B5] text-xs font-mono text-[#3D2B21]"
                 >
-                  {cat.category}
-                </button>
+                  {lang}
+                </span>
               ))}
             </div>
           </div>
 
-          {/* Active Category Skills Badges */}
-          <div className="pt-6">
-            <div className="flex flex-wrap gap-2.5">
-              {skillCategories[activeCategory].skills.map((skill, sIdx) => (
-                <div
-                  key={sIdx}
-                  className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-cyan-400/40 transition-all duration-200"
+          {/* Card 2: Narrow (5 cols) - AI & GenAI */}
+          <div className="md:col-span-5 p-7 sm:p-8 rounded-2xl bg-[#FAF5ED] border border-[#D5C6B5] shadow-xs text-left transform md:translate-y-2 hover:translate-y-1 transition-transform">
+            <div className="flex items-center justify-between pb-3 border-b border-[#D5C6B5]">
+              <h3 className="font-editorial text-xl font-bold text-[#20140E]">
+                Multimodal AI & GenAI
+              </h3>
+              <span className="text-xs font-mono px-2.5 py-1 rounded bg-[#FFFDF9] text-[#AD5424] font-semibold">
+                Vision + Speech
+              </span>
+            </div>
+            <p className="text-sm sm:text-base text-[#4D3A2F] mt-3.5 leading-relaxed">
+              Google Gemini 2.0 Flash for low-latency visual threat classification, OpenAI Whisper for audio NLP, and local private Qwen3-VL inference via Ollama.
+            </p>
+            <div className="flex flex-wrap gap-2 mt-5">
+              {technicalSkills.aiGenAi.map((ai, aIdx) => (
+                <span
+                  key={aIdx}
+                  className="px-2.5 py-1 rounded bg-[#FFFDF9] border border-[#D5C6B5] text-xs font-mono text-[#20140E]"
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="text-xs font-medium text-slate-200">{skill}</span>
-                </div>
+                  {ai}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Card 3: Narrow (5 cols) - Frameworks */}
+          <div className="md:col-span-5 p-7 sm:p-8 rounded-2xl bg-[#FFFDF9] border border-[#E7DDD0] shadow-xs text-left transform hover:-translate-y-0.5 transition-transform">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E7DDD0]">
+              <h3 className="font-editorial text-xl font-bold text-[#20140E]">
+                Frameworks & Sockets
+              </h3>
+              <span className="text-xs font-mono text-[#7A6A5E]">
+                FastAPI • React
+              </span>
+            </div>
+            <p className="text-sm sm:text-base text-[#4D3A2F] mt-3.5 leading-relaxed">
+              Async REST APIs with FastAPI, component state with React.js, event-driven bidirectional chats via Socket.IO, and Prisma ORM for relational persistence.
+            </p>
+            <div className="flex flex-wrap gap-2 mt-5">
+              {technicalSkills.frameworks.map((fw, fIdx) => (
+                <span
+                  key={fIdx}
+                  className="px-2.5 py-1 rounded bg-[#F5EEE4] border border-[#D5C6B5] text-xs font-mono text-[#3D2B21]"
+                >
+                  {fw}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Card 4: Wide (7 cols) - Databases & Systems */}
+          <div className="md:col-span-7 p-7 sm:p-8 rounded-2xl bg-[#FAF5ED] border border-[#D5C6B5] shadow-xs text-left transform md:-translate-y-1 hover:-translate-y-2 transition-transform">
+            <div className="flex items-center justify-between pb-3 border-b border-[#D5C6B5]">
+              <h3 className="font-editorial text-xl font-bold text-[#20140E]">
+                Databases, Cloud & Design Toolchains
+              </h3>
+              <span className="text-xs font-mono px-2.5 py-1 rounded bg-[#FFFDF9] text-[#7A6A5E]">
+                Supabase • PostgreSQL
+              </span>
+            </div>
+            <p className="text-sm sm:text-base text-[#4D3A2F] mt-3.5 leading-relaxed">
+              Supabase realtime synchronization with local fallback caching, relational schema design in PostgreSQL, multi-role auth, Netlify/Railway deployment pipelines, and Figma UI/UX architecture.
+            </p>
+            <div className="flex flex-wrap gap-2.5 mt-5">
+              {technicalSkills.databasesTools.map((tool, tIdx) => (
+                <span
+                  key={tIdx}
+                  className="px-3 py-1.5 rounded bg-[#FFFDF9] border border-[#D5C6B5] text-xs font-mono text-[#20140E]"
+                >
+                  {tool}
+                </span>
               ))}
             </div>
           </div>
         </div>
       </div>
+
+      {/* SILKY SMOOTH COFFEE BLEND: Transition from Beige to #8C5A3C */}
+      <div className="w-full h-44 sm:h-64 blend-beige-to-brown pointer-events-none" />
     </section>
   );
 }

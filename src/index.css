@@ -1,101 +1,212 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    /* The Coffee Palette: Foam, Latte, Crema, Rich Warm Brown (#8C5A3C) */
+    --coffee-foam: #FFFDF9;
+    --coffee-latte: #F5EEE4;
+    --coffee-crema: #EBE0D2;
+    --coffee-mocha: #7A4C30;
+    --coffee-brown: #8C5A3C;
+    --coffee-dark-brown: #73472C;
+    --coffee-deep: #5A351E;
+    --coffee-caramel: #F2A663;
+    --coffee-cinnamon: #AD5424;
+    --coffee-border-light: #E7DDD0;
+    --coffee-border-brown: #A47253;
+  }
+
   * {
     box-sizing: border-box;
   }
+
   html {
     scroll-behavior: smooth;
+    background-color: var(--coffee-foam);
+    color: #20140E;
   }
+
   body {
     margin: 0;
     padding: 0;
-    background-color: #05070d;
-    color: #e2e8f0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--coffee-foam);
+    color: #20140E;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
+
+  h1, h2, h3, h4, .font-editorial {
+    font-family: 'Source Serif 4', Georgia, serif;
+    letter-spacing: -0.015em;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+  }
 }
 
-/* Custom Glassmorphism Utility Classes */
-.glass-panel {
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), inset 0 1px 1px 0 rgba(255, 255, 255, 0.1);
-}
-
-.glass-card {
-  background: rgba(17, 24, 39, 0.55);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.glass-card:hover {
-  background: rgba(30, 41, 59, 0.7);
-  border-color: rgba(99, 102, 241, 0.35);
-  box-shadow: 0 12px 30px rgba(99, 102, 241, 0.18), inset 0 1px 2px rgba(255, 255, 255, 0.15);
-  transform: translateY(-3px);
-}
-
-.glass-pill {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Conveyor Belt / Infinite Marquee Animation */
-@keyframes marquee-left {
+/* Hardware-accelerated 60fps ticker */
+@keyframes ticker-slide {
   0% {
-    transform: translateX(0%);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
-@keyframes marquee-right {
-  0% {
-    transform: translateX(-50%);
-  }
-  100% {
-    transform: translateX(0%);
-  }
-}
-
-.animate-marquee-left {
+.ticker-track {
   display: flex;
   width: max-content;
-  animation: marquee-left 32s linear infinite;
+  will-change: transform;
+  animation: ticker-slide 36s linear infinite;
 }
 
-.animate-marquee-right {
-  display: flex;
-  width: max-content;
-  animation: marquee-right 32s linear infinite;
-}
-
-.pause-hover:hover .animate-marquee-left,
-.pause-hover:hover .animate-marquee-right {
+.ticker-container:hover .ticker-track {
   animation-play-state: paused;
 }
 
-/* Custom subtle scrollbar */
+/* Shared creamy microfoam texture for all blend dividers */
+[class*="blend-"] {
+  position: relative;
+  overflow: hidden;
+}
+
+[class*="blend-"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+}
+
+/* Foam to Latte */
+.blend-foam-latte {
+  background:
+    radial-gradient(ellipse 80% 35% at 30% 45%, rgba(255, 253, 249, 0.55) 0%, transparent 100%),
+    linear-gradient(180deg,
+      #FFFDF9 0%,
+      #FDF9F2 22%,
+      #FAF4EA 52%,
+      #F7F0E6 78%,
+      #F5EEE4 100%
+    );
+}
+
+/* Beige to #8C5A3C: Layered creamy latte pour */
+.blend-beige-to-brown {
+  background:
+    radial-gradient(ellipse 85% 28% at 24% 34%, rgba(255, 250, 242, 0.38) 0%, transparent 100%),
+    radial-gradient(ellipse 75% 26% at 78% 58%, rgba(235, 206, 174, 0.24) 0%, transparent 100%),
+    radial-gradient(ellipse 90% 24% at 45% 74%, rgba(115, 71, 44, 0.14) 0%, transparent 100%),
+    linear-gradient(180deg,
+      #F5EEE4 0%,
+      #F3EBDF 11%,
+      #EDE0CF 22%,
+      #E3CEB6 34%,
+      #D6B899 47%,
+      #C49D7B 60%,
+      #AE815F 73%,
+      #9B6B4B 85%,
+      #905F40 94%,
+      #8C5A3C 100%
+    );
+}
+
+/* #8C5A3C to Cappuccino Beige */
+.blend-brown-to-beige {
+  background:
+    radial-gradient(ellipse 85% 26% at 72% 30%, rgba(115, 71, 44, 0.16) 0%, transparent 100%),
+    radial-gradient(ellipse 80% 28% at 28% 55%, rgba(235, 206, 174, 0.22) 0%, transparent 100%),
+    radial-gradient(ellipse 85% 26% at 68% 72%, rgba(255, 250, 242, 0.35) 0%, transparent 100%),
+    linear-gradient(180deg,
+      #8C5A3C 0%,
+      #916041 9%,
+      #9E6E4E 20%,
+      #B38664 33%,
+      #C8A281 47%,
+      #DABDA1 61%,
+      #E7D3BE 74%,
+      #F0E3D5 86%,
+      #F5ECE2 94%,
+      #F6EFE6 100%
+    );
+}
+
+/* Experience Beige to #8C5A3C Resume desk */
+.blend-beige-to-resume {
+  background:
+    radial-gradient(ellipse 85% 28% at 74% 34%, rgba(255, 250, 242, 0.38) 0%, transparent 100%),
+    radial-gradient(ellipse 75% 26% at 24% 58%, rgba(235, 206, 174, 0.24) 0%, transparent 100%),
+    radial-gradient(ellipse 90% 24% at 55% 74%, rgba(115, 71, 44, 0.14) 0%, transparent 100%),
+    linear-gradient(180deg,
+      #F6EFE6 0%,
+      #F3ECE0 11%,
+      #EDE0CF 22%,
+      #E3CEB6 34%,
+      #D6B899 47%,
+      #C49D7B 60%,
+      #AE815F 73%,
+      #9B6B4B 85%,
+      #905F40 94%,
+      #8C5A3C 100%
+    );
+}
+
+/* #8C5A3C to Footer dark brown */
+.blend-brown-to-footer {
+  background:
+    radial-gradient(ellipse 80% 35% at 50% 45%, rgba(164, 114, 83, 0.16) 0%, transparent 100%),
+    linear-gradient(180deg,
+      #8C5A3C 0%,
+      #8A583B 18%,
+      #845337 45%,
+      #7B4C31 74%,
+      #73472C 100%
+    );
+}
+
+/* Subtle link underline */
+.link-editorial {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link-editorial::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+.link-editorial:hover::after {
+  opacity: 1;
+}
+
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #090d16;
+  background: #F5EEE4;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-  border-radius: 4px;
+  background: #C4A28B;
+  border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
+  background: #8C5A3C;
 }
